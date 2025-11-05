@@ -22,7 +22,7 @@ A web application built with FastAPI and Mistral AI to help users understand com
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/SasiRekhaSadanala/Research_Simplifier.git]
+    git clone https://github.com/SasiRekhaSadanala/Research_Simplifier.git
     cd research-simplifier
     ```
 
