@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generated Flashcards</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-100">
+
+    <header class="bg-white shadow-md">
+        <nav class="container mx-auto max-w-5xl px-6 py-4 flex justify-between items-center">
+            <a href="/" class="text-2xl font-bold text-gray-800">
+                🧠 PaperSimplifier
+            </a>
+            <a href="/" class="bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition">
+                Upload New Paper
+            </a>
+        </nav>
+    </header>
+
+    <main class="container mx-auto max-w-4xl p-6 mt-10">
+        <div class="bg-white shadow-xl rounded-lg p-8 md:p-12">
+
+            <h1 class="text-3xl font-bold text-gray-800 mb-6">
+                📚 Generated Flashcards
+            </h1>
+            
+            <a href="javascript:history.back()" class="text-blue-600 hover:underline mb-8 block">
+                &larr; Back to Summary
+            </a>
+
+            <section>
+                {% if error %}
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <strong class="font-bold">Error:</strong>
+                    <span class="block sm:inline">{{ error }}</span>
+                </div>
+                
+                {% else %}
+                <p class="text-gray-600 text-lg mb-6">Click on a card to flip it over.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {% for card in flashcards %}
+                    <div x-data="{ flipped: false }" class="h-64 perspective" @click="flipped = !flipped">
+                        <div class="relative w-full h-full transform-style-3d transition-transform duration-500"
+                             :class="{ 'rotate-y-180': flipped }">
+                            
+                            <div class="absolute w-full h-full backface-hidden bg-indigo-600 text-white rounded-lg shadow-lg flex items-center justify-center p-6">
+                                <h3 class="text-3xl font-bold text-center">{{ card.term }}</h3>
+                            </div>
+                            
+                            <div class="absolute w-full h-full backface-hidden rotate-y-180 bg-white border border-gray-300 rounded-lg shadow-lg p-6 overflow-y-auto 
+                                        prose prose-lg max-w-none">
+                                <p>{{ card.definition }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <style>
+                    .perspective { perspective: 1000px; }
+                    .transform-style-3d { transform-style: preserve-d; }
+                    .backface-hidden { backface-visibility: hidden; }
+                    .rotate-y-180 { transform: rotateY(180deg); }
+                </style>
+                {% endif %}
+            </section>
+        </div>
+    </main>
+
+</body>
+</html>

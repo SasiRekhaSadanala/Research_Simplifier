@@ -1,0 +1,13 @@
+# Python virtual environment
+venv/
+*.venv
+
+# Secret API keys
+.env
+
+# Python cache files
+__pycache__/
+*.pyc
+
+# Temporary PDF uploads
+temp_*.pdf
